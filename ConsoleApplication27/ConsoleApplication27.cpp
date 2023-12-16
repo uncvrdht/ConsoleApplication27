@@ -9,18 +9,29 @@ private:
     int age;
 
 public:
-    Student(string n, int a) : name(n), age(a) {}
+    Student(string n, int a) {
+        SetName(n);
+        SetAge(a);
+    }
 
     string GetName() const {
         return name;
+    }
+
+    void SetName(string n) {
+        name = n;
     }
 
     int GetAge() const {
         return age;
     }
 
+    void SetAge(int a) {
+        age = a;
+    }
+
     void Print() const {
-        cout << "Студент: " << name << ", Возраст: " << age << " лет\n";
+        cout << "Студент: " << GetName() << ", Возраст: " << GetAge() << " лет\n";
     }
 };
 
@@ -29,15 +40,21 @@ private:
     string thesisTopic;
 
 public:
-    Aspirant(string n, int a, string topic) : Student(n, a), thesisTopic(topic) {}
+    Aspirant(string n, int a, string topic) : Student(n, a) {
+        SetThesisTopic(topic);
+    }
 
     string GetThesisTopic() const {
         return thesisTopic;
     }
 
+    void SetThesisTopic(string topic) {
+        thesisTopic = topic;
+    }
+
     void Print() const {
         Student::Print();
-        cout << "Тема кандидатской работы: " << thesisTopic << "\n";
+        cout << "Тема кандидатской работы: " << GetThesisTopic() << "\n";
     }
 };
 
@@ -66,58 +83,26 @@ protected:
 
 public:
     void Fill() const {
-        cout << "Заливка цветом: " << color << "\n";
+        cout << "Заливка цветом: " << GetColor() << "\n";
+    }
+
+    string GetColor() const {
+        return color;
+    }
+
+    void SetColor(string c) {
+        color = c;
     }
 };
 
-class SolidBrush : public Brush {
-public:
-    SolidBrush() {
-        color = "Однородный цвет";
-    }
-};
+class SolidBrush : public Brush {};
+class GradientBrush : public Brush {};
+class HatchBrush : public Brush {};
+class TextureBrush : public Brush {};
+class VisualBrush : public Brush {};
 
-class GradientBrush : public Brush {
-public:
-    GradientBrush() {
-        color = "Градиентный цвет";
-    }
-};
-
-class HatchBrush : public Brush {
-public:
-    HatchBrush() {
-        color = "Цвет заливки с узором";
-    }
-};
-
-class TextureBrush : public Brush {
-public:
-    TextureBrush() {
-        color = "Цвет заливки с текстурой";
-    }
-};
-
-class VisualBrush : public Brush {
-public:
-    VisualBrush() {
-        color = "Цвет заливки с использованием визуального элемента";
-    }
-};
-
-class LinearGradientBrush : public GradientBrush {
-public:
-    LinearGradientBrush() {
-        color = "Градиентный цвет по линейной оси";
-    }
-};
-
-class RadialGradientBrush : public GradientBrush {
-public:
-    RadialGradientBrush() {
-        color = "Градиентный цвет по радиальной оси";
-    }
-};
+class LinearGradientBrush : public GradientBrush {};
+class RadialGradientBrush : public GradientBrush {};
 
 class Geometry {
 protected:
@@ -165,7 +150,17 @@ private:
     int fontSize;
 
 public:
-    Font(int size) : fontSize(size) {}
+    Font(int size) {
+        SetFontSize(size);
+    }
+
+    int GetFontSize() const {
+        return fontSize;
+    }
+
+    void SetFontSize(int size) {
+        fontSize = size;
+    }
 };
 
 int main() {
@@ -181,7 +176,7 @@ int main() {
     student.Print();
 
     aspirant.Print();
-  
+
     Car car;
     car.CalculateTripDetails();
 
@@ -212,5 +207,6 @@ int main() {
     polyline.Draw();
 
     Font font(12);
-  
+
+    return 0;
 }
