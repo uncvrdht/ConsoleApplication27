@@ -9,25 +9,20 @@ private:
     int age;
 
 public:
-    Student(string n, int a) {
-        SetName(n);
-        SetAge(a);
-    }
-
-    string GetName() const {
-        return name;
-    }
-
-    void SetName(string n) {
+    void SetName(const string& n) {
         name = n;
     }
 
-    int GetAge() const {
-        return age;
+    const string& GetName() const {
+        return name;
     }
 
     void SetAge(int a) {
         age = a;
+    }
+
+    int GetAge() const {
+        return age;
     }
 
     void Print() const {
@@ -40,16 +35,12 @@ private:
     string thesisTopic;
 
 public:
-    Aspirant(string n, int a, string topic) : Student(n, a) {
-        SetThesisTopic(topic);
-    }
-
-    string GetThesisTopic() const {
-        return thesisTopic;
-    }
-
-    void SetThesisTopic(string topic) {
+    void SetThesisTopic(const string& topic) {
         thesisTopic = topic;
+    }
+
+    const string& GetThesisTopic() const {
+        return thesisTopic;
     }
 
     void Print() const {
@@ -82,16 +73,16 @@ protected:
     string color;
 
 public:
-    void Fill() const {
-        cout << "Заливка цветом: " << GetColor() << "\n";
+    void SetColor(const string& c) {
+        color = c;
     }
 
-    string GetColor() const {
+    const string& GetColor() const {
         return color;
     }
 
-    void SetColor(string c) {
-        color = c;
+    void Fill() const {
+        cout << "Заливка цветом: " << GetColor() << "\n";
     }
 };
 
@@ -150,32 +141,31 @@ private:
     int fontSize;
 
 public:
-    Font(int size) {
-        SetFontSize(size);
+    void SetFontSize(int size) {
+        fontSize = size;
     }
 
     int GetFontSize() const {
         return fontSize;
-    }
-
-    void SetFontSize(int size) {
-        fontSize = size;
     }
 };
 
 int main() {
     setlocale(LC_ALL, "ru");
 
-    Student student("Иван", 20);
+    Student student;
+    student.SetName("Иван");
+    student.SetAge(20);
+
     cout << "Имя студента: " << student.GetName() << ", Возраст: " << student.GetAge() << " лет\n";
 
-    Aspirant aspirant("Петр", 25, "Исследование алгоритмов");
+    Aspirant aspirant;
+    aspirant.SetName("Петр");
+    aspirant.SetAge(25);
+    aspirant.SetThesisTopic("Исследование алгоритмов");
+
     cout << "Имя аспиранта: " << aspirant.GetName() << ", Возраст: " << aspirant.GetAge() << " лет\n";
     cout << "Тема кандидатской работы: " << aspirant.GetThesisTopic() << "\n";
-
-    student.Print();
-
-    aspirant.Print();
 
     Car car;
     car.CalculateTripDetails();
@@ -206,7 +196,8 @@ int main() {
     ellipse.Draw();
     polyline.Draw();
 
-    Font font(12);
+    Font font;
+    font.SetFontSize(12);
 
     return 0;
 }
